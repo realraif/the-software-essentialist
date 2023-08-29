@@ -18,7 +18,7 @@ export class UserController {
 	) => {
 		try {
 			const user = await this.userService.createUser(req.body);
-			res.json(user);
+			res.status(201).json(user);
 		} catch (err) {
 			next(err);
 		}
@@ -33,7 +33,7 @@ export class UserController {
 
 		try {
 			const user = await this.userService.editUser(userId, req.body);
-			res.json(user);
+			res.status(201).json(user);
 		} catch (err) {
 			next(err);
 		}
@@ -48,7 +48,7 @@ export class UserController {
 
 		try {
 			const user = await this.userService.getUserByEmail(email);
-			res.json(user);
+			res.status(201).json(user);
 		} catch (err) {
 			next(err);
 		}

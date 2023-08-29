@@ -26,7 +26,15 @@ export class UserService {
 
     user.password = getHashedPassword(user.password);
         
-    return await this.prisma.user.create({ data: user });
+    return await this.prisma.user.create({ data: user,
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        firstName: true,
+        lastName: true
+     }
+    });
   }
 
   async editUser(id: number, user: EditUserRequest) {
@@ -54,11 +62,27 @@ export class UserService {
       user.password = getHashedPassword(user.password);
     }
 
-    return await this.prisma.user.update({ where: { id }, data: user });
+    return await this.prisma.user.update({ where: { id }, data: user, 
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        firstName: true,
+        lastName: true
+     }
+    });
   }
 
   async getUserByEmail(email: string) {
-    const user = await this.prisma.user.findUnique({ where: { email } });
+    const user = await this.prisma.user.findUnique({ where: { email },
+      select: {
+        id: true,
+        email: true,
+        username: true,
+        firstName: true,
+        lastName: true
+     }
+    });
     if (!user) {
       throw new EmailNotFoundError();
     }
