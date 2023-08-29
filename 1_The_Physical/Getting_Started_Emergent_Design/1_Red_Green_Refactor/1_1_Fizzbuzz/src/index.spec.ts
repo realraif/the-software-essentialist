@@ -6,9 +6,10 @@ describe("fizzbuzz", () => {
     expect(typeof fizzBuzz(5)).toBe("string");
   });
 
-  it ("returns multiples of three such as 3, 6, 9, and 12 as 'Fizz'", () => {
-    [3, 6, 9, 12].map((multiple) => fizzBuzz(multiple))
-      .forEach((m) => expect(m).toEqual("Fizz"))
+  it.each([3, 6, 9, 12])
+  ("returns 'Fizz' for multiples of three such as 3, 6, 9, and 12",
+  (input: number) => {
+      expect(fizzBuzz(input)).toEqual("Fizz");
   });
 
   it("returns multiples of five such as 5, 10, and 20 as buzz", () => {
@@ -16,9 +17,10 @@ describe("fizzbuzz", () => {
       .forEach((m) => expect(m).toEqual("Buzz"));
   });
 
-  it ("returns multiples of both such as 15 and 45 as 'FizzBuzz'", () => {
-    [15, 45].map((multiple) => fizzBuzz(multiple))
-      .forEach((m) => expect(m).toEqual("FizzBuzz"))
+  it.each([[15, 'FizzBuzz'], [45, 'FizzBuzz']])
+  ("returns 'FizzBuzz' for multiples of both such as 15 and 45",
+  (input: number, output: string) => {
+      expect(fizzBuzz(input)).toEqual(output);
   });
 
   it("returns string output of a number such as 43 -> '43'", () => {
