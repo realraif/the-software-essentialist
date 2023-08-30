@@ -6,38 +6,46 @@ describe("fizzbuzz", () => {
     expect(typeof fizzBuzz(5)).toBe("string");
   });
 
-  it.each([3, 6, 9, 12])
-  ("returns 'Fizz' for multiples of three such as 3, 6, 9, and 12",
-  (input: number) => {
-      expect(fizzBuzz(input)).toEqual("Fizz");
+
+  describe("returns string output of a number", () => {
+    it.each([[43, '43'], [17, '17']])
+    ("returns '%i' for %i", (input: number, output: string) => {
+        expect(fizzBuzz(input)).toEqual(output);
+    });
   });
 
-  it("returns multiples of five such as 5, 10, and 20 as buzz", () => {
-    [5, 10, 20].map((multiple) => fizzBuzz(multiple))
-      .forEach((m) => expect(m).toEqual("Buzz"));
+  describe("returns 'Fizz' for multiples of three", () => {
+    it.each([3, 6, 9, 12])
+    ("returns 'Fizz' for %i", (input: number) => {
+        expect(fizzBuzz(input)).toEqual("Fizz");
+    });
   });
 
-  it.each([[15, 'FizzBuzz'], [45, 'FizzBuzz']])
-  ("returns 'FizzBuzz' for multiples of both such as 15 and 45",
-  (input: number, output: string) => {
-      expect(fizzBuzz(input)).toEqual(output);
+  describe("returns 'Buzz' for multiples of five", () => {
+    it.each([5, 10, 20])
+    ("returns 'Buzz' for %i", (input: number) => {
+        expect(fizzBuzz(input)).toEqual("Buzz");
+    });
   });
 
-  it("returns string output of a number such as 43 -> '43'", () => {
-    expect(fizzBuzz(43)).toBe("43");
+  describe("returns 'FizzBuzz' for multiples of both", () => {
+    it.each([15, 45])
+    ("returns 'FizzBuzz' for %i", (input: number) => {
+        expect(fizzBuzz(input)).toEqual("FizzBuzz");
+    });
   });
 
   describe("accepts only numbers between 1 to 100", () => {
 
-    it("throws an error when input is 102", () => {
+    it("throws an error for 102", () => {
       expect(() => fizzBuzz(102)).toThrow("Input must be a number between 1 and 100.");
     });
 
-    it("throws an error when input is -12", () => {
+    it("throws an error for -12", () => {
       expect(() => fizzBuzz(-12)).toThrow("Input must be a number between 1 and 100.");
     });
   
-    it("throws an error when input is not a number", () => {
+    it("throws an error for `abc`", () => {
       expect(() => fizzBuzz("abc")).toThrow("Input must be a number between 1 and 100.");
     });
 
