@@ -13,6 +13,7 @@ Contains at least one upper case letter
 examples:
 mom -> false
 mom123 -> false
+mom123a -> false
 mom123A -> true
 
 Return an object
@@ -47,6 +48,16 @@ describe('password validator', () => {
 
   it('should know that "mom123" is invalid', () => {
     const data = "mom123";
+    const validationResponse = passwordValidator.validate(data);
+
+    expect(validationResponse.result).toBe(false);
+    expect(validationResponse.errors).toBeDefined();
+    expect(validationResponse.errors.length).toEqual(1);
+    expect(validationResponse.errors[0].message).toContain('at least one upper case letter');
+  });
+
+  it('should know that "mom123a" is invalid', () => {
+    const data = "mom123a";
     const validationResponse = passwordValidator.validate(data);
 
     expect(validationResponse.result).toBe(false);
