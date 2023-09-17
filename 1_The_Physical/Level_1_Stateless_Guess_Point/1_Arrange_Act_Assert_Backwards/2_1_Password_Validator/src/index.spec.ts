@@ -66,4 +66,13 @@ describe('password validator', () => {
     expect(validationResponse.errors[0].message).toContain('at least one upper case letter');
   });
 
+  it('should know that "mom123A" is valid', () => {
+    const data = "mom123A";
+    const validationResponse = passwordValidator.validate(data);
+
+    expect(validationResponse.result).toBe(true);
+    expect(validationResponse.errors).toBeDefined();
+    expect(validationResponse.errors.length).toEqual(0);
+  });
+
 })
