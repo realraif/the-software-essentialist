@@ -3,7 +3,25 @@ import { passwordValidator } from './index'
 
 describe('password validator', () => {
 
-  it('should know that "mom" is invalid', () => {
+  it.each(["mom", "Mona", "mom123", "mom123a", "Mom1234566778855"])
+  (`should know that "%s" is invalid`, (data) => {
+    const validationResponse = passwordValidator.validate(data);
+
+    expect(validationResponse.result).toBe(false);
+    expect(validationResponse.errors).toBeDefined();
+  });
+
+  it.each(["mom123", "mom123a"])
+  ('should know that "%s" lacks upper cases', (data) => {
+    const validationResponse = passwordValidator.validate(data);
+
+    expect(validationResponse.result).toBe(false);
+    expect(validationResponse.errors).toBeDefined();
+    expect(validationResponse.errors.length).toEqual(1);
+    expect(validationResponse.errors[0].message).toContain('at least one upper case letter');
+  });
+
+  it('should know that "mom" contains all errors', () => {
     const data = "mom";
     const validationResponse = passwordValidator.validate(data);
 
@@ -15,27 +33,7 @@ describe('password validator', () => {
     expect(validationResponse.errors[2].message).toContain('at least one upper case letter');
   });
 
-  it('should know that "mom123" is invalid', () => {
-    const data = "mom123";
-    const validationResponse = passwordValidator.validate(data);
-
-    expect(validationResponse.result).toBe(false);
-    expect(validationResponse.errors).toBeDefined();
-    expect(validationResponse.errors.length).toEqual(1);
-    expect(validationResponse.errors[0].message).toContain('at least one upper case letter');
-  });
-
-  it('should know that "mom123a" is invalid', () => {
-    const data = "mom123a";
-    const validationResponse = passwordValidator.validate(data);
-
-    expect(validationResponse.result).toBe(false);
-    expect(validationResponse.errors).toBeDefined();
-    expect(validationResponse.errors.length).toEqual(1);
-    expect(validationResponse.errors[0].message).toContain('at least one upper case letter');
-  });
-
-  it('should know that "Mona" is invalid', () => {
+  it('should know that "Mona" contains two errors', () => {
     const data = "Mona";
     const validationResponse = passwordValidator.validate(data);
 
@@ -46,7 +44,7 @@ describe('password validator', () => {
     expect(validationResponse.errors[1].message).toContain('at least one digit');
   });
 
-  it('should know that "Mom1234566778855" is invalid', () => {
+  it('should know that "Mom1234566778855" exceeds the maximum length', () => {
     const data = "Mom1234566778855";
     const validationResponse = passwordValidator.validate(data);
 
