@@ -1,6 +1,32 @@
 
 import { passwordValidator, CheckedPasswordResponse } from './index'
 
+/*
+
+knows that out of range passwords are invalid
+- Pas1
+- Pas1234566778855
+
+knows that passwords without digits are invalid
+- Password
+- mom
+
+knows that passwords without upper cases are invalid
+- mom123
+- dad123
+
+cathches multiple errors
+- pas
+- Pass
+- 123
+
+knows that passwords with upper cases, digits and in range of 5 to 15 are valid
+- mom123A
+- dad123A
+
+*/
+
+
 describe('password validator', () => {
 
   it.each(["mom", "Mona", "mom123", "mom123a", "Mom1234566778855"])
