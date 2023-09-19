@@ -71,4 +71,18 @@ describe('stats calculator', () => {
     expect(result.count).toBe(4);
   });
 
+  it('knows that the average of [0, 1, 2] is 1', () => {
+    let series: number[] = [0, 1, 2];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.average).toBe(1);
+  });
+
+  it('knows that the average of [-1, 0, 100, 12] is 27.75', () => {
+    let series: number[] = [-1, 0, 100, 12];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.average).toBe(27.75);
+  });
+
 })
