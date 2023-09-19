@@ -1,7 +1,7 @@
 
 type validationErrorType = 'InvalidLengthError' | 'MissingDigitError' | 'NoUppercaseError';
 
-type ValidationError = {
+export type ValidationError = {
   type: validationErrorType;
   message: string;
 }
