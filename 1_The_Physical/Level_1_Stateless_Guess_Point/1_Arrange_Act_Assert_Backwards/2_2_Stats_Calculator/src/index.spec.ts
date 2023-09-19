@@ -22,11 +22,25 @@ describe('stats calculator', () => {
   it('returns 0 for all values if the sequence is empty', () => {
     let series: number[] = [];
     let result = StatsCalculator.processSeries(series);
-    
+
     expect(result.min).toBe(0);
     expect(result.max).toBe(0);
     expect(result.count).toBe(0);
     expect(result.average).toBe(0);
+  });
+
+  it('knows that the min value of [0, 1, 2] is 0', () => {
+    let series: number[] = [0, 1, 2];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.min).toBe(0);
+  });
+
+  it('knows that the min value of [-1, 0, 100, 12] is -1', () => {
+    let series: number[] = [-1, 0, 100, 12];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.min).toBe(-1);
   });
 
 })
