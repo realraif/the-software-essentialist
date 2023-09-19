@@ -57,4 +57,18 @@ describe('stats calculator', () => {
     expect(result.max).toBe(100);
   });
 
+  it ('knows that the count of [0, 1, 2] is 3', () => {
+    let series: number[] = [0, 1, 2];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.count).toBe(3);
+  });
+
+  it('knows that the count of [-1, 0, 100, 12] is 4', () => {
+    let series: number[] = [-1, 0, 100, 12];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.count).toBe(4);
+  });
+
 })

@@ -30,11 +30,12 @@ export class StatsCalculator {
   static processSeries(series: number[]): CalcResponse {
     const min = findMin(series);
     const max = findMax(series);
+    const count = series.length;
 
     return {
       min,
       max,
-      count: 0,
+      count,
       average: 0
     }
   }
