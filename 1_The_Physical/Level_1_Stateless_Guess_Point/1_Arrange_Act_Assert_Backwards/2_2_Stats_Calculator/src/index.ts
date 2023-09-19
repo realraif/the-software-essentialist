@@ -16,14 +16,24 @@ function findMin(series: number[]): number {
   }, 0);
 }
 
+function findMax(series: number[]): number {
+  return series.reduce((acc, curr) => {
+    if (curr > acc) {
+      return curr;
+    }
+    return acc;
+  }, 0);
+}
+
 export class StatsCalculator {
 
   static processSeries(series: number[]): CalcResponse {
     const min = findMin(series);
+    const max = findMax(series);
 
     return {
       min,
-      max: 0,
+      max,
       count: 0,
       average: 0
     }

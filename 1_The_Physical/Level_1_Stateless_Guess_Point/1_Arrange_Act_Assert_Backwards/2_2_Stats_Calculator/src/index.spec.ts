@@ -43,4 +43,18 @@ describe('stats calculator', () => {
     expect(result.min).toBe(-1);
   });
 
+  it('knows that the max value of [0, 1, 2] is 2', () => {
+    let series: number[] = [0, 1, 2];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.max).toBe(2);
+  });
+
+  it('knows that the max value of [-1, 0, 100, 12] is 100', () => {
+    let series: number[] = [-1, 0, 100, 12];
+    let result = StatsCalculator.processSeries(series);
+
+    expect(result.max).toBe(100);
+  });
+
 })
