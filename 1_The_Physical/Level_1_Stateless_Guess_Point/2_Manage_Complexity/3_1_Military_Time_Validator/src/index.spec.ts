@@ -53,4 +53,16 @@ describe('military time validator', () => {
     });
   });
 
+  it('knows that "01:12 - 14:32" has two times', () => {
+    const isTimeValid = MilitatyTimeValidator.validate("01:12 - 14:32");
+
+    expect(isTimeValid).toBe(true);
+  });
+
+  it('knows that "01:12" does not have two times', () => {
+    const isTimeValid = MilitatyTimeValidator.validate("01:12");
+
+    expect(isTimeValid).toBe(false);
+  });
+
 })
