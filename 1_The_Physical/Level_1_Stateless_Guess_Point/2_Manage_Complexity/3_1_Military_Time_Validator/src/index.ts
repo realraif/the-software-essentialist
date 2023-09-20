@@ -1,6 +1,7 @@
 
 export class MilitatyTimeValidator {
-  static validate(time: string): boolean {
-    return true;
+  static validate(timeRange: string): boolean {
+
+    return timeRange.includes('-');
   }
 }

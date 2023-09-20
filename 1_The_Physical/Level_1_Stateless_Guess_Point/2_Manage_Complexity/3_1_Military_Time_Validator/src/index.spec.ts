@@ -47,5 +47,12 @@ describe('military time validator', () => {
 
     expect(isTimeValid).toBe(true);
   });
-    
+
+  it('knows that "01:12" does not have a dash', () => {
+    const time = "01:12";
+    const isTimeValid = MilitatyTimeValidator.validate(time);
+
+    expect(isTimeValid).toBe(false);
+  });
+
 })
