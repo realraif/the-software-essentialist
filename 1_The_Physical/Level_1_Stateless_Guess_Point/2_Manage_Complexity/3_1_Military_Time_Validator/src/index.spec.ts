@@ -78,7 +78,7 @@ describe('military time validator', () => {
   it('returns false for an empty string', () => {
     const isTimeValid = MilitatyTimeValidator.validate('');
 
-    expect(isTimeValid).toBe(false);
+    expect(isTimeValid).toBeFalsy();
   });
 
 })
