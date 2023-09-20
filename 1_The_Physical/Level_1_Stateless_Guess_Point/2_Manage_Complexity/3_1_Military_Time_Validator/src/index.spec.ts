@@ -64,16 +64,17 @@ describe('military time validator', () => {
     });
   });
 
-  it('knows that "01:12 - 14:32" is in time format', () => {
-    const isTimeValid = MilitatyTimeValidator.validate("01:12 - 14:32");
+  describe('validates that a string has a time format', () => {
+    it.each([
+      ["01:12 - 14:32", true],
+      ["01:12 - 14:32:12", false],
+      ["01:12 - 14:32:12:12", false],
+      [")1 12 - 14:32", false],
+    ])('knows that "%s" returns %s', (time, expected) => {
+      const isTimeValid = MilitatyTimeValidator.validate(time);
 
-    expect(isTimeValid).toBe(true);
-  });
-
-  it('knows that "01:12 - 14:32:12" is not in time format', () => {
-    const isTimeValid = MilitatyTimeValidator.validate("01:12 - 14:32:12");
-
-    expect(isTimeValid).toBe(false);
+      expect(isTimeValid).toBe(expected);
+    });
   });
 
 })
