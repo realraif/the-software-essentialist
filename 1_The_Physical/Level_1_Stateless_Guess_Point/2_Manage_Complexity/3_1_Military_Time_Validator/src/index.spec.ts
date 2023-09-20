@@ -76,5 +76,16 @@ describe('military time validator', () => {
       expect(isTimeValid).toBe(expected);
     });
   });
+  
+  describe('validates that the first time is not the same as the second time', () => {
+    it.each([
+      ["01:12 - 14:32", true],
+      ["01:12 - 01:12", false],
+    ])('knows that "%s" returns %s', (time, expected) => {
+      const isTimeValid = MilitatyTimeValidator.validate(time);
+
+      expect(isTimeValid).toBe(expected);
+    });
+  });
 
 })
