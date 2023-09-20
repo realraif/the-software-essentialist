@@ -88,4 +88,16 @@ describe('military time validator', () => {
     });
   });
 
+  it('knows that for "01:12 - 14:32" the 24 hour time is valid', () => {
+    const isTimeValid = MilitatyTimeValidator.validate("01:12 - 14:32");
+
+    expect(isTimeValid).toBe(true);
+  });
+
+  it('knows that for "25:12 - 14:32" the 24 hour time is invalid', () => {
+    const isTimeValid = MilitatyTimeValidator.validate("25:12 - 14:32");
+
+    expect(isTimeValid).toBe(false);
+  });
+
 })
