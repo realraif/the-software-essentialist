@@ -100,4 +100,16 @@ describe('military time validator', () => {
     });
   });
 
+  it('knows that for "01:12 - 14:32" the minutes are valid', () => {
+    const isTimeValid = MilitatyTimeValidator.validate("01:12 - 14:32");
+
+    expect(isTimeValid).toBe(true);
+  });
+
+  it('knows that for "01:60 - 14:32" the minutes are not valid', () => {
+    const isTimeValid = MilitatyTimeValidator.validate("01:60 - 14:32");
+
+    expect(isTimeValid).toBe(false);
+  });
+
 })
