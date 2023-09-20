@@ -41,7 +41,7 @@ validate that the minutes are valid
 describe('military time validator', () => {
 
 
-  describe('validate that a string has a dash', () => {
+  describe('validates that a string has a dash', () => {
     it.each([
       ["01:12 - 14:32", true],
       ["01:12", false],
@@ -53,16 +53,16 @@ describe('military time validator', () => {
     });
   });
 
-  it('knows that "01:12 - 14:32" has two times', () => {
-    const isTimeValid = MilitatyTimeValidator.validate("01:12 - 14:32");
-
-    expect(isTimeValid).toBe(true);
-  });
-
-  it('knows that "01:12" does not have two times', () => {
-    const isTimeValid = MilitatyTimeValidator.validate("01:12");
-
-    expect(isTimeValid).toBe(false);
+  describe('validates that a string has two times', () => {
+    it.each([
+      ["01:12 - 14:32", true],
+      ["01:12", false],
+      ["01:12 - 14:32 - 15:32", false],
+    ])('knows that "%s" returns %s', (time, expected) => {
+      const isTimeValid = MilitatyTimeValidator.validate(time);
+      
+      expect(isTimeValid).toBe(expected);
+    });
   });
 
 })
