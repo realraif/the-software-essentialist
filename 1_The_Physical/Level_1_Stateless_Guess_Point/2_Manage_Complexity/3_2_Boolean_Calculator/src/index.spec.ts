@@ -58,17 +58,15 @@ import { BooleanCalculator } from './index';
 
 describe('boolean calculator', () => {
 
-
-  it('knows that "True" is true', () => {
-    const result = BooleanCalculator.validateInput('True');
-
-    expect(result).toBeTruthy();
-  });
-
-  it('knows that "False" is false', () => {
-    const result = BooleanCalculator.validateInput('False');
-
-    expect(result).toBeFalsy();
+  describe('validates single values', () => {
+    it.each([
+      ['True', true],
+      ['False', false],
+    ])('knows that "%s" is %s', (input, expected) => {
+      const result = BooleanCalculator.validateInput(input);
+      
+      expect(result).toBe(expected);
+    });
   });
 
 })
