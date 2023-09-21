@@ -11,6 +11,7 @@ describe('password validator', () => {
       expect(validationResponse.result).toBeFalsy();
       expect(validationResponse.errors).toBeDefined();
       expect(validationResponse.errors.length).toBeGreaterThanOrEqual(1);
+      expect(validationResponse.errors.some(error => error.type === "InvalidLengthError")).toBeTruthy();
     });
   });
 
@@ -21,6 +22,7 @@ describe('password validator', () => {
       expect(validationResponse.result).toBeFalsy();
       expect(validationResponse.errors).toBeDefined();
       expect(validationResponse.errors.length).toBeGreaterThanOrEqual(1);
+      expect(validationResponse.errors.some(error => error.type === "MissingDigitError")).toBeTruthy();
     });
 
   });
@@ -32,6 +34,7 @@ describe('password validator', () => {
       expect(validationResponse.result).toBeFalsy();
       expect(validationResponse.errors).toBeDefined();
       expect(validationResponse.errors.length).toBeGreaterThanOrEqual(1);
+      expect(validationResponse.errors.some(error => error.type === "NoUppercaseError")).toBeTruthy();
     });
   });
   
@@ -47,16 +50,18 @@ describe('password validator', () => {
 
   describe('cathches multiple errors', () => {
     it.each([
-      ["pas", [{type: "NoUppercaseError"}, {type: "MissingDigitError"}, {type: "InvalidLengthError"}]],
-      ["Pass", [{type: "MissingDigitError"}, {type: "InvalidLengthError"}]],
-      ["123", [{type: "NoUppercaseError"}, {type: "InvalidLengthError"}]],
-    ])(`knows that "%s" has multiple errors`, (password, errors) => {
+      ["pas", ["MissingDigitError", "NoUppercaseError", "InvalidLengthError"]],
+      ["Pass", ["MissingDigitError", "InvalidLengthError"]],
+      ["123", ["NoUppercaseError", "InvalidLengthError"]],
+    ])(`knows that "%s" has multiple errors`, (password, expectedErrors) => {
       let validationResponse: CheckedPasswordResponse = passwordValidator.validate(password);
+      let errorTypes = validationResponse.errors.map(error => error.type);
 
       expect(validationResponse.result).toBeFalsy();
       
       expect(validationResponse.errors).toBeDefined();
-      expect(validationResponse.errors.length).toEqual(errors.length);
+      expect(validationResponse.errors.length).toEqual(expectedErrors.length);
+      expect(errorTypes.every(error => expectedErrors.includes(error))).toBeTruthy();
     });
   });
 })
