@@ -5,7 +5,7 @@ const isWrappedParenthesesRegex = /^\((.*)\)$/;
 export class BooleanCalculator {
 
   static validateSingleValue(input: string): boolean {
-    const hasFalse = input.includes('False');
+    const hasFalse = input.toLocaleLowerCase().includes('false');
     const hasNot = input.includes('NOT');
     return !hasFalse && !hasNot || hasFalse && hasNot;
   }
@@ -20,7 +20,7 @@ export class BooleanCalculator {
         } else {
           return subCondition
         }
-      }).join('');
+      }).join(' ');
 
     const orArray = conditionWithouParentheses.split(' OR ');
     
