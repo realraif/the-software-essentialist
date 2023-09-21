@@ -112,6 +112,7 @@ describe('boolean calculator', () => {
       ['True OR NOT False AND False OR False AND True', true],
       ['True AND False OR True AND False', false],
       ['True AND False OR True AND NOT True', false],
+      ['False AND NOT False', false],
     ])('knows that "%s" is %s', (input, expected) => {
       const result = BooleanCalculator.validateInput(input);
 
