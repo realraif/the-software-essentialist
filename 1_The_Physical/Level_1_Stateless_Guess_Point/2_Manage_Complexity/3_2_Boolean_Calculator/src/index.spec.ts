@@ -94,12 +94,15 @@ describe('boolean calculator', () => {
     });
   });
 
-  it('knows that "NOT True" is false', () => {
-    const input = 'NOT True';
+  describe('validates NOT', () => {
+    it.each([
+      ['NOT True', false],
+      ['NOT False', true],
+    ])('knows that "%s" is %s', (input, expected) => {
+      const result = BooleanCalculator.validateInput(input);
 
-    const result = BooleanCalculator.validateInput(input);
-
-    expect(result).toBeFalsy();
+      expect(result).toBe(expected);
+    });
   });
 
 })
