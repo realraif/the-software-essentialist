@@ -2,7 +2,7 @@
 export class BooleanCalculator {
 
   static validateInput(input: string): boolean {
-    const isTrue = input === 'True';
+    const isTrue = !input.includes('False');
 
     return isTrue;
   }

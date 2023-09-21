@@ -69,4 +69,16 @@ describe('boolean calculator', () => {
     });
   });
 
+  it('knows that "True AND False" is false', () => {
+    const result = BooleanCalculator.validateInput('True AND False');
+    
+    expect(result).toBe(false);
+  });
+
+  it('knows that "True AND True" is true', () => {
+    const result = BooleanCalculator.validateInput('True AND True');
+    
+    expect(result).toBe(true);
+  });
+
 })
