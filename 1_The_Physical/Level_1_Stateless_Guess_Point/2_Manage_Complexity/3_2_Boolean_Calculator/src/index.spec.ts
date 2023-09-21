@@ -143,4 +143,18 @@ describe('boolean calculator', () => {
     });
   });
 
+  describe('validates complex expressions with nested parentheses', () => {
+    it.each([
+      ['(True OR False) AND (False OR (True AND False))', false],
+      ['(True OR False) AND (False OR (True AND False) OR True)', true],
+      ['(True OR False) AND (False OR (True AND False) OR True) OR False', true],
+      ['False OR (True AND (False OR True))', true],
+      ['True AND (False OR (True AND False))', false],
+    ])('knows that "%s" is %s', (input, expected) => {
+      const result = BooleanCalculator.validateInput(input);
+
+      expect(result).toBe(expected);
+    });
+  });
+
 })
