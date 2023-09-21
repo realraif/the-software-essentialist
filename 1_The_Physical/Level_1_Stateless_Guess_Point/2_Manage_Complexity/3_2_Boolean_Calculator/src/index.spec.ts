@@ -8,7 +8,7 @@ describe('boolean calculator', () => {
       ['True', true],
       ['False', false],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
       
       expect(result).toBe(expected);
     });
@@ -20,7 +20,7 @@ describe('boolean calculator', () => {
       ['True AND True', true],
       ['False AND False', false],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
 
       expect(result).toBe(expected);
     });
@@ -33,7 +33,7 @@ describe('boolean calculator', () => {
       ['False OR False', false],
       ['True OR False AND False', true],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
 
       expect(result).toBe(expected);
     });
@@ -44,7 +44,7 @@ describe('boolean calculator', () => {
       ['NOT True', false],
       ['NOT False', true],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
 
       expect(result).toBe(expected);
     });
@@ -65,7 +65,7 @@ describe('boolean calculator', () => {
       ['True OR NOT False AND NOT True OR NOT False', true],
       ['NOT True AND NOT False OR NOT True OR False', false],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
 
       expect(result).toBe(expected);
     });
@@ -82,7 +82,7 @@ describe('boolean calculator', () => {
       ['True AND (False OR True)', true],
       ['False OR (True)', true],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
 
       expect(result).toBe(expected);
     });
@@ -96,7 +96,7 @@ describe('boolean calculator', () => {
       ['False OR (True AND (False OR True))', true],
       ['True AND (False OR (True AND False))', false],
     ])('knows that "%s" is %s', (input, expected) => {
-      const result = BooleanCalculator.validateInput(input);
+      const result = BooleanCalculator.validateExpression(input);
 
       expect(result).toBe(expected);
     });
@@ -105,7 +105,7 @@ describe('boolean calculator', () => {
   describe('throws error for invalid input', () => {
     it.each(['sdf', ''])('throws error for "%s"', (input) => {
       expect(() => {
-        BooleanCalculator.validateInput(input);
+        BooleanCalculator.validateExpression(input);
       }).toThrowError();
     });
   });

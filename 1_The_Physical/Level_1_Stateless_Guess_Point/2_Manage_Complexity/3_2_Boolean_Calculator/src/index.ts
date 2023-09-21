@@ -18,7 +18,7 @@ export class BooleanCalculator {
     const noParanthesesArray = parenthesesArray.map((subCondition) => {
         if (isWrappedParenthesesReg.test(subCondition)) {
           const strippedString = subCondition.substring(1, subCondition.length-1)
-          return BooleanCalculator.validateInput(strippedString); 
+          return BooleanCalculator.validateExpression(strippedString); 
         } else {
           return subCondition
         }
@@ -27,12 +27,12 @@ export class BooleanCalculator {
     return noParanthesesArray.join(' ');
   }
 
-  static validateInput(input: string): boolean {
-    if (!isValidFormatReg.test(input)) {
+  static validateExpression(conditionalExpression: string): boolean {
+    if (!isValidFormatReg.test(conditionalExpression)) {
       throw new Error('Invalid expression format');
     }
 
-    const conditionWithouParentheses = BooleanCalculator.validateParentheses(input);
+    const conditionWithouParentheses = BooleanCalculator.validateParentheses(conditionalExpression);
     const orArray = conditionWithouParentheses.split(' OR ');
     
     const isTrue = orArray.some((orItem) => {
