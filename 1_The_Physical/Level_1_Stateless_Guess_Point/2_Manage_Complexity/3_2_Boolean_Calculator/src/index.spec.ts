@@ -102,4 +102,12 @@ describe('boolean calculator', () => {
     });
   });
 
+  describe('throws error for invalid input', () => {
+    it.each(['sdf', ''])('throws error for "%s"', (input) => {
+      expect(() => {
+        BooleanCalculator.validateInput(input);
+      }).toThrowError();
+    });
+  });
+
 })

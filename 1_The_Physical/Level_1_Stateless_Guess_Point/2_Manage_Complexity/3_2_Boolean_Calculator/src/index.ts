@@ -1,6 +1,8 @@
 
 const splitParenthesesReg = /(\([^)]+\))/;
 const isWrappedParenthesesReg = /^\((.*)\)$/;
+const isValidFormatReg = /^(\(*\s*(True|False|NOT|AND|OR)\s*\)*)+$/;
+
 
 export class BooleanCalculator {
 
@@ -26,6 +28,10 @@ export class BooleanCalculator {
   }
 
   static validateInput(input: string): boolean {
+    if (!isValidFormatReg.test(input)) {
+      throw new Error('Invalid expression format');
+    }
+
     const conditionWithouParentheses = BooleanCalculator.validateParentheses(input);
     const orArray = conditionWithouParentheses.split(' OR ');
     
