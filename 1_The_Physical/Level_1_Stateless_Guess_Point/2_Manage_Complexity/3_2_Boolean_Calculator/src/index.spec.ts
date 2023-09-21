@@ -105,4 +105,18 @@ describe('boolean calculator', () => {
     });
   });
 
+  describe('knows the order of operations is NOT, AND, OR', () => {
+    it.each([
+      ['True OR False AND False', true],
+      ['True OR NOT False AND False', true],
+      ['True OR NOT False AND False OR False AND True', true],
+      ['True AND False OR True AND False', false],
+      ['True AND False OR True AND NOT True', false],
+    ])('knows that "%s" is %s', (input, expected) => {
+      const result = BooleanCalculator.validateInput(input);
+
+      expect(result).toBe(expected);
+    });
+  });
+
 })

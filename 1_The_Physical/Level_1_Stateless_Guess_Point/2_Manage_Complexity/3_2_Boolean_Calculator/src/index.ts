@@ -5,7 +5,7 @@ export class BooleanCalculator {
     const orArray = input.split(' OR ');
     const isTrue = orArray.some((orItem) => {
       const hasFalse = orItem.includes('False');
-      const hasNot = orItem.startsWith('NOT');
+      const hasNot = orItem.includes('NOT');
       return !hasFalse && !hasNot || hasFalse && hasNot;
     });
 
