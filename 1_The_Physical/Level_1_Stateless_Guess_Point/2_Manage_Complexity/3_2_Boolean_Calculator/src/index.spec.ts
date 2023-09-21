@@ -94,4 +94,12 @@ describe('boolean calculator', () => {
     });
   });
 
+  it('knows that "NOT True" is false', () => {
+    const input = 'NOT True';
+
+    const result = BooleanCalculator.validateInput(input);
+
+    expect(result).toBeFalsy();
+  });
+
 })
