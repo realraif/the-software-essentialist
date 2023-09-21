@@ -2,7 +2,8 @@
 export class BooleanCalculator {
 
   static validateInput(input: string): boolean {
-    const isTrue = !input.includes('False');
+    const orArray = input.split(' OR ');
+    const isTrue = orArray.some((orItem) => !orItem.includes('False'));
 
     return isTrue;
   }

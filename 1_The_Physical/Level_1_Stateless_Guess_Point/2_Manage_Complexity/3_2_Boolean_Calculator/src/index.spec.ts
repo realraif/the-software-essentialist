@@ -81,4 +81,11 @@ describe('boolean calculator', () => {
     });
   });
 
+  it('knows that "True OR False" is true', () => {
+    const input = 'True OR False';
+    const result = BooleanCalculator.validateInput(input);
+
+    expect(result).toBeTruthy();
+  });
+
 })
