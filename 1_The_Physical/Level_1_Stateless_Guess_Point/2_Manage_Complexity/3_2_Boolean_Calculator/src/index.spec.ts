@@ -126,4 +126,12 @@ describe('boolean calculator', () => {
     });
   });
 
+  it('knows that "(True OR False) AND False" is false', () => {
+    const input = '(True OR False) AND False';
+
+    const result = BooleanCalculator.validateInput(input);
+
+    expect(result).toBeFalsy();
+  });
+
 })
