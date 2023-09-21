@@ -1,6 +1,6 @@
 
 const splitParenthesesReg = /(\([^)]+\))/;
-const isWrappedParenthesesRegex = /^\((.*)\)$/;
+const isWrappedParenthesesReg = /^\((.*)\)$/;
 
 export class BooleanCalculator {
 
@@ -10,18 +10,23 @@ export class BooleanCalculator {
     return !hasFalse && !hasNot || hasFalse && hasNot;
   }
 
-  static validateInput(input: string): boolean {
+  static validateParentheses(input: string): string {
     const parenthesesArray = input.split(splitParenthesesReg);
 
-    const conditionWithouParentheses = parenthesesArray.map((subCondition) => {
-        if (isWrappedParenthesesRegex.test(subCondition)) {
+    const noParanthesesArray = parenthesesArray.map((subCondition) => {
+        if (isWrappedParenthesesReg.test(subCondition)) {
           const strippedString = subCondition.substring(1, subCondition.length-1)
           return BooleanCalculator.validateInput(strippedString); 
         } else {
           return subCondition
         }
-      }).join(' ');
+      });
 
+    return noParanthesesArray.join(' ');
+  }
+
+  static validateInput(input: string): boolean {
+    const conditionWithouParentheses = BooleanCalculator.validateParentheses(input);
     const orArray = conditionWithouParentheses.split(' OR ');
     
     const isTrue = orArray.some((orItem) => {
