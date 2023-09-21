@@ -64,4 +64,11 @@ describe('boolean calculator', () => {
 
     expect(result).toBeTruthy();
   });
+
+  it('knows that "False" is false', () => {
+    const result = BooleanCalculator.validateInput('False');
+
+    expect(result).toBeFalsy();
+  });
+
 })
